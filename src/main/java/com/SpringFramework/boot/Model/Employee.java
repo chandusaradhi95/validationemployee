@@ -22,32 +22,32 @@ import org.springframework.validation.annotation.Validated;
 @Entity
 @Table(name="Employee")
 public class Employee {
-	
+
 	@Id
 	@NotNull(message="employee id should ot be null")
 	private String employeeId;
-	
+
 	@NotNull
 	private String firstName;
-	
+
 	@NotNull
 	private String lastName;
-	
+
 	@Email
 	private String email;
-	
+
 	@ElementCollection
     @CollectionTable(name="phoneNumbers")
 	@Pattern(regexp="(^$|[0-9]{10})")
 //	@Size(min = 10,max=10, message = "phone number is not valid")
 	private List<String> phoneNumber = new ArrayList<String>();
-	
+
 	@NotNull
 	private String doj;
-	
+
 	@NotNull(message="please enter salary")
 	private int salary;
-	
+
 	public String getEmployeeId() {
 		return employeeId;
 	}
@@ -80,15 +80,11 @@ public class Employee {
 		this.email = email;
 	}
 
-	public String getPhoneNumber() {
+	public List<String> getPhoneNumber() {
 		if(this.phoneNumber==null) {
 			this.phoneNumber= new ArrayList<String>();
 		}
-		String temp = "";
-		for(String t : phoneNumber) {
-			temp += "," + t;
-		}
-		return temp;
+		return phoneNumber;
 	}
 
 	public void setPhoneNumber(List<String> phoneNumber) {
@@ -111,10 +107,10 @@ public class Employee {
 		this.salary = salary;
 	}
 
-	
 
-	
 
-	
+
+
+
 
 }
